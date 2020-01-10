@@ -866,3 +866,98 @@ int main() {
 }
 */
 
+/* RGB 거리
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <limits.h>
+using namespace std;
+
+vector<vector<long long>> rgb(1001, vector<long long>(3, 0));
+vector<vector<long long>> mincost(1001, vector<long long>(3, 0));
+
+int main() {
+
+	int n;
+	scanf("%d", &n);
+
+	// 0 행은 비워놓는다.
+	for (int i = 1; i <= n; i++) {
+		for (int j = 0; j < 3; j++) {
+			cin >> rgb[i][j];
+		}
+	}
+	
+	for (int i = 1; i <= n; i++) {
+		mincost[i][0] = min(mincost[i - 1][1], mincost[i - 1][2]) + rgb[i][0];
+		mincost[i][1] = min(mincost[i - 1][0], mincost[i - 1][2]) + rgb[i][1];
+		mincost[i][2] = min(mincost[i - 1][0], mincost[i - 1][1]) + rgb[i][2];
+	}
+
+	long long solution = min(min(mincost[n][0], mincost[n][1]), mincost[n][2]);
+
+	printf("%lld\n", solution);
+
+	return 0;
+}
+*/
+
+/* 1932 - 계단 오르기
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+vector<vector<long long>>triangle(501, vector<long long>(501));
+
+int main() {
+	int n;
+
+	scanf("%d", &n);
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= i; j++) {
+			scanf("%lld", &triangle[i][j]);
+		}
+	}
+
+	for (int i = 2; i <= n; i++) {
+		for (int j = 1; j <= i; j++) {
+		// /
+			if(j==1) triangle[i][j] += triangle[i - 1][j];
+			else if(j==i) triangle[i][j] += triangle[i - 1][j - 1];
+			else triangle[i][j] += (long long)max(triangle[i - 1][j - 1], triangle[i - 1][j]);
+		}
+	}
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= i; j++) {
+			printf("%lld ", triangle[i][j]);
+		}
+		printf("\n");
+	}
+	
+	long long solution=LONG_MIN;
+	
+	for (int j = 1; j <= n; j++) {
+		solution = (long long)max(triangle[n][j], solution);
+	}
+	
+	printf("\n%lld\n", solution);
+	
+	return 0;
+}
+*/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <vector>
+
