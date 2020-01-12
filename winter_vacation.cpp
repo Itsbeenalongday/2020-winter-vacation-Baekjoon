@@ -990,6 +990,7 @@ int main() {
 }
 */
 
+/* 1463 - 1로 만들기
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
@@ -999,9 +1000,78 @@ int main() {
 
 using namespace std;
 
+/*
+N을 최소 횟수로 1로 만드는 과정은 
+"주어진 수(N)에서 -1또는 /2 또는 /3을 하여 수를 최소 횟수로 줄여나가 
+1까지 만든다"의 사고과정을 따른다. 
+그러나 이를 조금 바꿔 다른말로 표현 해 보자.
+=>
+주어진 수(N)을 1로 만드는 최소 횟수는 =  
+'N-1을 1로 만드는 최소 횟수 + 1번' 또는 
+'N/2를 1로 만드는 최소 횟수 +1번' 또는 
+'N/3을 1로 만드는 최소 횟수 + 1번' 이 된다.
+(약간 비약적인 일반화가 있긴 했지만 N에 수를 대입해보면 이해가 갈 것이다.)
+*/
+/*
+vector<int> make_1(1000001);
+
 int main() {
-	int cnt = 0;
 	int n;
-	
+	scanf("%d", &n);
+	make_1[1] = 0;
+
+	for (int i = 2; i <= n; i++) {
+		// 10을 1로만드는데 10 -> 9 -> 3 -> 1이므로
+		// 9를 1로만드는 최소횟수 + 3을 1로만드는 최소횟수가 사용된다.
+		// n-1을 1로 만드는 최소횟수
+		make_1[i] = make_1[i - 1] + 1;
+		// n-1을 1로 만드는 최소횟수 또는 n/2를 1로 만드는 최소횟수
+		if (i % 2 == 0) make_1[i] = min(make_1[i], make_1[i / 2] + 1);
+		// n/2를 1로 만드는 최소횟수 또는 n/3을 1로 만드는 최소횟수
+		if (i % 3 == 0) make_1[i] = min(make_1[i], make_1[i / 3] + 1);
+	}
+
+	printf("%d\n", make_1[n]);
+
 	return 0;
 }
+*/
+
+/* 10844 - 쉬운 계단 수
+#define _CRT_SECURE_NO_WARNINGS
+#define mod 1000000000
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> stair_num(101,vector<int>(10, 0));
+
+int main() {
+	int n;
+	int sum = 0;
+	scanf("%d", &n);
+	
+	for (int i = 0; i < 10; i++)
+		stair_num[1][i] = 1;
+
+	for (int i = 2; i <= n; i++) {
+		for (int j = 0; j < 10; j++) {
+			if (j == 0)
+				stair_num[i][0] = stair_num[i - 1][1] % mod;
+			else if (j == 9)
+				stair_num[i][9] = stair_num[i - 1][8] % mod;
+			else
+				stair_num[i][j] = (stair_num[i - 1][j - 1] + stair_num[i - 1][j + 1]) % mod;
+		}
+	}
+
+	for (int i = 1; i < 10; i++)
+		sum = (sum + stair_num[n][i]) % mod;
+
+	printf("%d\n", sum % mod);
+
+	return 0;
+}
+*/
