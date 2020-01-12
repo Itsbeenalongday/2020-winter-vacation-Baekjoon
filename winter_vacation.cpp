@@ -954,6 +954,7 @@ int main() {
 }
 */
 
+/* 2579 - 계단 오르기
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
@@ -961,3 +962,46 @@ int main() {
 #include <cstdio>
 #include <vector>
 
+using namespace std;
+
+vector<long long> stairs(301);
+vector<long long> dp(301);
+
+int main() {
+	
+	int n;
+	
+	scanf("%d",&n);
+
+	for (int i = 0; i < n;i++) {
+		scanf("%lld", &stairs[i]);
+	}
+
+	dp[0] = stairs[0];
+	dp[1] = max(stairs[0] + stairs[1], stairs[1]);
+	dp[2] = max(stairs[0] + stairs[2], stairs[1] + stairs[2]);
+
+	for (int i = 3; i < n; i++) {
+		dp[i] = max(dp[i - 3] + stairs[i - 1] + stairs[i], dp[i - 2] + stairs[i]);
+	}
+
+	printf("%lld\n", dp[n - 1]);
+	return 0;
+}
+*/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+
+int main() {
+	int cnt = 0;
+	int n;
+	
+	return 0;
+}
