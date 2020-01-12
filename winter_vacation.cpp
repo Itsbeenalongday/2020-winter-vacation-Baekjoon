@@ -904,7 +904,7 @@ int main() {
 }
 */
 
-/* 1932 - 계단 오르기
+/* 1932 - 정수 삼각형
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <vector>
@@ -1075,3 +1075,48 @@ int main() {
 	return 0;
 }
 */
+
+/* 2156 - 포도주 시식
+// 계단오르기와 다른점 - 계단문제는 반드시 올라가야하지만 얘는 2번연속으로 건너뛰는거 가능
+// 그래서 i-1번째와 i번째 비교해야함
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+vector<int> wine(10005);
+vector<long long> dp(10005);
+
+int main() {
+	int n;
+	scanf("%d", &n);
+
+	for (int i = 1; i <= n; i++) {
+		scanf("%d", &wine[i]);
+	}
+
+	dp[1] = wine[1];
+	dp[2] = wine[2] + wine[1];
+
+	for (int i = 3; i <= n; i++) {
+		dp[i] = max(dp[i - 3] + wine[i - 1] + wine[i], dp[i - 2] + wine[i]);
+		dp[i] = max(dp[i], dp[i - 1]);
+	}
+
+	printf("%lld\n", dp[n]);
+
+	return 0;
+}
+*/
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+int main() {
+
+}
