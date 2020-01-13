@@ -1112,11 +1112,31 @@ int main() {
 }
 */
 
+/* 11053 - 가장 긴 증가하는 부분수열
 #define _CRT_SECURE_NO_WARNINGS
-#include <vector>
+
 #include <iostream>
 #include <algorithm>
+using namespace std;
+
+int seq[1001], len, n;
 
 int main() {
 
+	ios_base::sync_with_stdio(false);
+	
+	cin >> n;
+	
+	for (int i = 1; i <= n; ++i) {
+		int here;
+		cin >> here;
+		auto pos = lower_bound(seq + 1, seq + len + 1, here);
+		*pos = here;
+		if (pos == seq + len + 1)
+			len++;
+	}
+	cout << len;
+	return 0;
 }
+*/
+
