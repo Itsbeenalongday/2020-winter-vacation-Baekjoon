@@ -1,4 +1,2 @@
 ﻿  winter_vacation.cpp
-C:\Users\유성민\Desktop\git\2020 winter vacation Baekjoon\winter_vacation.cpp(1211,23): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\유성민\Desktop\git\2020 winter vacation Baekjoon\winter_vacation.cpp(1248,23): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   2020 winter vacation Baekjoon.vcxproj -> C:\Users\유성민\Desktop\git\2020 winter vacation Baekjoon\x64\Debug\2020 winter vacation Baekjoon.exe
