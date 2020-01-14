@@ -1140,3 +1140,129 @@ int main() {
 }
 */
 
+/* 2529 - 부등호
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+bool check(vector<int>& seq, vector<char>& sign_of_inequality) {
+	for (int i = 0; i < sign_of_inequality.size(); i++) {
+		if (sign_of_inequality[i] == '<' && seq[i] > seq[i+1])
+			return false;
+		if (sign_of_inequality[i] == '>' && seq[i] < seq[i+1])
+			return false;
+	}
+	return true;
+}
+
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int k;
+	cin >> k;
+	vector<char> sign_of_inequality(k);
+	for (int i = 0; i < k; i++) {
+		cin >> sign_of_inequality[i];
+	}
+	vector<int>max(k + 1);
+	vector<int>min(k + 1);
+	for (int i = 0; i <= k; i++) {
+		max[i] = 9 - i;
+		min[i] = i;
+	}
+
+	do {
+		if(check(max, sign_of_inequality))
+			break;
+	} while (prev_permutation(max.begin(), max.end()));
+
+	do {
+		if (check(min, sign_of_inequality))
+			break;
+	} while (next_permutation(min.begin(), min.end()));
+
+	for (int i = 0; i <= k; i++) {
+		cout << max[i];
+	}
+	cout << "\n";
+	for (int i = 0; i <= k; i++) {
+		cout << min[i];
+	}
+	cout << "\n";
+	return 0;
+}
+*/
+
+/* 1339 - 단어 수학
+#include <vector>
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+
+char alphabet[256];
+
+int calc(vector<string>& word, vector<char>& letter, vector<int>& seq) {
+	int m = letter.size();
+	
+	int sum = 0;
+	for (int i = 0; i < m; i++) {
+		alphabet[letter[i]] = seq[i];
+	}
+	
+	for (string s : word) {
+		int now = 0;
+		for (char l : s) {
+			now = now * 10 + alphabet[l];
+		}
+		sum += now;
+	}
+
+	return sum;
+}
+
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n;
+	cin >> n;
+	vector<string> word(n);
+	vector<char> letter;
+
+	for (int i = 0; i < n; i++) {
+		cin >> word[i];
+		for (char l : word[i])
+			letter.push_back(l);
+	}
+
+	sort(letter.begin(), letter.end());
+	letter.erase(unique(letter.begin(), letter.end()), letter.end());
+
+	int m = letter.size();
+	vector<int> seq;
+
+	for (int i = 9-m+1; i <=9; i++) {
+		seq.push_back(i);
+	}
+	
+	int solution = 0;
+
+	do {
+		int now = calc(word, letter, seq);
+		if (solution < now) {
+			solution = now;
+		}
+	} while (next_permutation(seq.begin(), seq.end()));
+
+	cout << solution << endl;
+	return 0;
+}
+*/
