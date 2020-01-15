@@ -1266,3 +1266,11 @@ int main() {
 	return 0;
 }
 */
+
+#include <algorithm>
+#include <vector>
+#include <iostream>
+
+int main() {
+
+}
